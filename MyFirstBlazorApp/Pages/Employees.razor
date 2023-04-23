@@ -1,0 +1,36 @@
+﻿@page "/employees"
+@inject MyFirstBlazorApp.Data.IEmployeesService EmployeesService;
+
+<h3>Employee</h3>
+<table class="table">
+    <thead>
+    <tr>
+        <td>ID</td>
+        <td>Name</td>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach(var emp in employees)
+        {
+            <tr>
+                <td>@emp.Id</td>
+                <td>@emp.Name</td>
+                <td>
+                    <a href="editemployees/@emp.Id">Edit</a>
+                </td>
+            </tr>
+        }
+        
+    </tbody>
+
+</table>
+
+@code {
+    private List<MyFirstBlazorApp.Data.Employees> employees;
+
+    protected override void OnInitialized()
+    {
+        employees = EmployeesService.GetEmployees();
+    }
+}   
+

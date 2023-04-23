@@ -1,0 +1,35 @@
+﻿@page "/employees/{id}"
+@inject MyFirstBlazorApp.Data.IEmployeesService EmployeesService;
+@inject NavigationManager Navigation                              //navigates back 
+
+<EditForm Model="employee">
+    <div class="form-group">
+        <label>Id</label>
+        <input id="id" class="form-control" name="id" value="@employee.Id" readonly/>
+    </div>
+    <div>
+        <label>Name</label>
+         <input id="name" class="form-control" name="name" @bind-value="@employee.Name" readonly/>
+    </div>
+    <button type="submit" class="btn btn-primary">Update </button>
+
+</EditForm>
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+
+    private MyFirstBlazorApp.Data.Employees employee { get; set; }
+
+    protected override void OnInitialized()
+    {
+        employee = EmployeesService.GetEmployees(Guid.Parse(Id));
+    }
+
+    private void SubmitForm()
+    {
+        EmployeesService.UpdateEmployees(employee);
+        Navigation.NavigateTo("employees");
+    }
+}
+
