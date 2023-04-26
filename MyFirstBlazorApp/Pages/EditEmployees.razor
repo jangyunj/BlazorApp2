@@ -23,13 +23,28 @@
 
     protected override void OnInitialized()
     {
-        employee = EmployeesService.GetEmployees(Guid.Parse(Id));
+        if (!string.IsNullOrEmpty(Id) && Id == "0")
+        {
+            employee = new Data.Employees();
+        } else
+        {
+            employee = EmployeesService.GetEmployees(Guid.Parse(Id));
+        }
+        
     }
 
     private void SubmitForm()
     {
-        EmployeesService.UpdateEmployees(employee);
+        if(employee.Id == Guid.Empty)
+        {
+            EmployeesService.AddEmployee(employee);
+        } else
+        {
+            EmployeesService.UpdateEmployees(employee);
+        }
+        
         Navigation.NavigateTo("employees");
     }
 }
+
 

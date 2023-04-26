@@ -18,6 +18,15 @@
             }
         };
 
+        public void AddEmployee(Employees employee)
+        {
+            var id = Guid.NewGuid();
+            employee.Id = id;
+            employeesList.Add(employee);
+
+            
+        }
+
         public List<Employees> GetEmployees()
         {
             return employeesList;

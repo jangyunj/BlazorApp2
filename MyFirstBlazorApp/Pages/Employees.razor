@@ -2,6 +2,9 @@
 @inject MyFirstBlazorApp.Data.IEmployeesService EmployeesService;
 
 <h3>Employee</h3>
+<br />
+
+<a href="temployees/0">Add Employee</a>
 <table class="table">
     <thead>
     <tr>
@@ -31,6 +34,19 @@
     protected override void OnInitialized()
     {
         employees = EmployeesService.GetEmployees();
+    }
+
+    private List<Pet> pets = new()
+    {
+        new Pet { PetId = 2, Name = "Mr. Bigglesworth" },
+        new Pet { PetId = 4, Name = "Salem Saberhagen" },
+        new Pet { PetId = 7, Name = "K-9" }
+    };
+
+    private class Pet
+    {
+        public int PetId { get; set; }
+        public string? Name { get; set; }
     }
 }   
 

@@ -6,5 +6,7 @@
         Employees GetEmployees(Guid id);
 
         void UpdateEmployees(Employees employee);
+
+        void AddEmployee(Employees employee);
     }
 }
